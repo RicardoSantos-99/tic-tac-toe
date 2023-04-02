@@ -20,6 +20,13 @@ defmodule TicTacToeWeb.Router do
     get "/", PageController, :home
 
     resources "/users", UserController
+
+    live "/room", RoomsLive.Index, :index
+    live "/room/new", RoomsLive.Index, :new
+    live "/room/:id/edit", RoomsLive.Index, :edit
+
+    live "/room/:id", RoomsLive.Show, :show
+    live "/room/:id/show/edit", RoomsLive.Show, :edit
   end
 
   # Other scopes may use custom stacks.

@@ -1,0 +1,42 @@
+<.header>
+  Listing Room
+  <:actions>
+    <.link patch={~p"/room/new"}>
+      <.button>New Rooms</.button>
+    </.link>
+  </:actions>
+</.header>
+
+<.table
+  id="room"
+  rows={@streams.room}
+  row_click={fn {_id, rooms} -> JS.navigate(~p"/room/#{rooms}") end}
+>
+  <:col :let={{_id, rooms}} label="Name"><%= rooms.name %></:col>
+  <:col :let={{_id, rooms}} label="Owner"><%= rooms.owner %></:col>
+  <:action :let={{_id, rooms}}>
+    <div class="sr-only">
+      <.link navigate={~p"/room/#{rooms}"}>Show</.link>
+    </div>
+    <.link patch={~p"/room/#{rooms}/edit"}>Edit</.link>
+  </:action>
+  <:action :let={{id, rooms}}>
+    <.link
+      phx-click={JS.push("delete", value: %{id: rooms.id}) |> hide("##{id}")}
+      data-confirm="Are you sure?"
+    >
+      Delete
+    </.link>
+  </:action>
+</.table>
+
+<.modal :if={@live_action in [:new, :edit]} id="rooms-modal" show on_cancel={JS.patch(~p"/room")}>
+  <.live_component
+    module={TicTacToeWeb.RoomsLive.FormComponent}
+    id={@rooms.id || :new}
+    title={@page_title}
+    action={@live_action}
+    rooms={@rooms}
+    patch={~p"/room"}
+  />
+</.modal>
