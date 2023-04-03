@@ -1,27 +1,6 @@
-<.header>
-  Rooms <%= @rooms.id %>
-  <:subtitle>This is a rooms record from your database.</:subtitle>
-  <:actions>
-    <.link patch={~p"/room/#{@rooms}/show/edit"} phx-click={JS.push_focus()}>
-      <.button>Edit rooms</.button>
-    </.link>
-  </:actions>
-</.header>
-
-<.list>
-  <:item title="Name"><%= @rooms.name %></:item>
-  <:item title="Owner"><%= @rooms.owner %></:item>
-</.list>
-
-<.back navigate={~p"/room"}>Back to room</.back>
-
-<.modal :if={@live_action == :edit} id="rooms-modal" show on_cancel={JS.patch(~p"/room/#{@rooms}")}>
-  <.live_component
-    module={TicTacToeWeb.RoomsLive.FormComponent}
-    id={@rooms.id}
-    title={@page_title}
-    action={@live_action}
-    rooms={@rooms}
-    patch={~p"/room/#{@rooms}"}
-  />
-</.modal>
+<body class="bg-black">
+  <.board game={} id="header" module={Header}></.board>
+  <.back navigate={~p"/room"}>
+    <p class="text-white">Back to room</p>
+  </.back>
+</body>

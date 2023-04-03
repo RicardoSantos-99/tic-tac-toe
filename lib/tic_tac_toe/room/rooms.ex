@@ -6,7 +6,8 @@ defmodule TicTacToe.Room.Rooms do
   @foreign_key_type :binary_id
   schema "room" do
     field :name, :string
-    field :owner, Ecto.UUID
+
+    belongs_to :user, TicTacToe.Accounts.User, foreign_key: :owner
 
     timestamps()
   end

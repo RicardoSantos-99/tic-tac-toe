@@ -18,7 +18,7 @@ defmodule TicTacToe.Room do
 
   """
   def list_room do
-    Repo.all(Rooms)
+    Repo.all(Rooms) |> Repo.preload(:user)
   end
 
   @doc """
@@ -35,7 +35,7 @@ defmodule TicTacToe.Room do
       ** (Ecto.NoResultsError)
 
   """
-  def get_rooms!(id), do: Repo.get!(Rooms, id)
+  def get_rooms!(id), do: Repo.get!(Rooms, id) |> Repo.preload(:user)
 
   @doc """
   Creates a rooms.

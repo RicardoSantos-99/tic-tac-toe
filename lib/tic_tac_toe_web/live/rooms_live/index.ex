@@ -6,6 +6,7 @@ defmodule TicTacToeWeb.RoomsLive.Index do
 
   @impl true
   def mount(_params, _session, socket) do
+    IO.inspect(Room.list_room())
     {:ok, stream(socket, :room, Room.list_room())}
   end
 

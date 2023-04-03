@@ -1,5 +1,6 @@
 defmodule TicTacToeWeb.RoomsLive.Show do
   use TicTacToeWeb, :live_view
+  import TicTacToeWeb.Components.Board
 
   alias TicTacToe.Room
 
